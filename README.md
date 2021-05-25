@@ -1,8 +1,10 @@
 go-swagger-ui
 ============
 
-[![test](https://github.com/esurdam/go-swagger-ui/actions/workflows/go.yml/badge.svg)](https://github.com/esurdam/go-swagger-ui/actions/workflows/go.yml)
+[![Documentation](https://godoc.org/github.com/esurdam/go-swagger-ui?status.svg)](http://godoc.org/github.com/esurdam/go-swagger-ui)
 [![Go Report Card](https://goreportcard.com/badge/github.com/esurdam/go-swagger-ui)](https://goreportcard.com/report/github.com/esurdam/go-swagger-ui)
+[![test](https://github.com/esurdam/go-swagger-ui/actions/workflows/go.yml/badge.svg)](https://github.com/esurdam/go-swagger-ui/actions/workflows/go.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/esurdam/go-swagger-ui/blob/main/LICENSE)
 
 This repo provides go handlers for serving `swagger.json` and the [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
