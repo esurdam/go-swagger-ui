@@ -38,4 +38,4 @@ mux := swaggerui.NewServeMuxWithRoot(Asset, "swagger.json", "/v1/auth") // add s
 `swagger` directory contains auto-generated output.
 
 1. Add updated assets to //third_party/swagger-ui
-2. Run `bash hack/build-ui.sh` which will compile swagger into `swagger/bindata.go`
+2. Run `make build` which will compile swagger into `swagger/bindata.go`

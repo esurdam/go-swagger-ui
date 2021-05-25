@@ -1,6 +1,9 @@
-.PHONY: coverage test
+.PHONY: coverage test build
 
-.DEFAULT_GOAL = test
+.DEFAULT_GOAL = build
+
+build:
+	bash hack/build-ui.sh
 
 test:
 	go test -v -race .
