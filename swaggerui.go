@@ -49,7 +49,7 @@ func AddHandle(mux *http.ServeMux, root string) {
 	if root != "/" {
 		prefix = root + defaultPath
 		mux.Handle(prefix, &pathHandler{
-			root: http.StripPrefix(prefix, fileServer),
+			root:   http.StripPrefix(prefix, fileServer),
 			prefix: prefix,
 		})
 		return

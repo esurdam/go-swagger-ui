@@ -1,9 +1,10 @@
 package swaggerui_test
 
 import (
-	swaggerui "github.com/esurdam/go-swagger-ui"
 	"net/http/httptest"
 	"testing"
+
+	swaggerui "github.com/esurdam/go-swagger-ui"
 )
 
 var DefaultAssetFn = func(s string) ([]byte, error) {
@@ -22,7 +23,7 @@ func TestNewServeMux(t *testing.T) {
 		{
 			name: "TestNewServeMux",
 			args: args{
-				assetFn: DefaultAssetFn,
+				assetFn:  DefaultAssetFn,
 				filename: "swagger.json",
 			},
 		},
@@ -49,7 +50,7 @@ func TestNewServeMux(t *testing.T) {
 				t.Errorf("NewServeMuxWithRoot() GET swagger-ui failed, expected 200, got %d", w.Code)
 			}
 			if res := w.Body.String(); res != "test" {
-				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s",res)
+				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s", res)
 			}
 		})
 	}
@@ -104,7 +105,7 @@ func TestNewServeMuxWithRoot(t *testing.T) {
 				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 200, got %d", w.Code)
 			}
 			if res := w.Body.String(); res != "test" {
-				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s",res)
+				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s", res)
 			}
 		})
 	}

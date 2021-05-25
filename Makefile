@@ -5,10 +5,15 @@
 build:
 	bash hack/build-ui.sh
 
-test:
-	go test -v -race .
-
 coverage:
 	go test -v -coverprofile=coverage.txt -covermode=count .
 	go tool cover --html=coverage.txt -o coverage.html
+
+fmt:
+	gofmt -w -s *.go
+	goimports -w *.go
+
+test:
+	go test -v -race .
+
 
