@@ -1,8 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "go_default_library",
-    srcs = ["datafile.go"],
-    importpath = "adgreetz.io/internal/swag/swagger",
-    visibility = ["//:__subpackages__"],
-)
