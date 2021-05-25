@@ -15,16 +15,11 @@ const defaultPath = "/swagger-ui/"
 
 // AssetFn is a function handler which returns the swagger.json bytes.
 // Used to instantiate handler with swagger.json.
-type AssetFn func(string)([]byte, error)
+type AssetFn func(string) ([]byte, error)
 
 type pathHandler struct {
 	root   http.Handler
 	prefix string
-}
-
-// PathHandler return an http.Handler which handles prefix stripping.
-func PathHandler(root http.Handler, prefix string) http.Handler {
-	return &pathHandler{root, prefix}
 }
 
 // ServeHTTP handles prefixes for serving the UI.
@@ -52,7 +47,10 @@ func serveSwagger(mux *http.ServeMux, root string) {
 	prefix := defaultPath
 	if root != "/" {
 		prefix = root + defaultPath
-		mux.Handle(prefix, PathHandler(http.StripPrefix(prefix, fileServer), prefix))
+		mux.Handle(prefix, &pathHandler{
+			root: http.StripPrefix(prefix, fileServer),
+			prefix: prefix,
+		})
 		return
 	}
 	mux.Handle(prefix, http.StripPrefix(prefix, fileServer))
