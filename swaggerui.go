@@ -35,7 +35,8 @@ func (f *pathHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	f.root.ServeHTTP(w, r)
 }
 
-func serveSwagger(mux *http.ServeMux, root string) {
+// AddHandle adds the swagger-ui Handle to the provided mux at the provided root.
+func AddHandle(mux *http.ServeMux, root string) {
 	mime.AddExtensionType(".svg", "image/svg+xml")
 
 	// Expose files in third_party/swagger-ui/ on <host>/swagger-ui
@@ -73,6 +74,6 @@ func NewServeMuxWithRoot(assetFn AssetFn, filename, root string) *http.ServeMux 
 		}
 		res.Write(data)
 	})
-	serveSwagger(mux, root)
+	AddHandle(mux, root)
 	return mux
 }
