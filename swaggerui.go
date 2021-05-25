@@ -65,7 +65,7 @@ func NewServeMux(assetFn AssetFn, filename string) *http.ServeMux {
 // Passing in root = "/v1/auth" will yield a path of "/v1/auth/swagger.json"
 func NewServeMuxWithRoot(assetFn AssetFn, filename, root string) *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.HandleFunc(filepath.Join(root, "swagger.json"), func(res http.ResponseWriter, req *http.Request) {
+	mux.HandleFunc(filepath.Join(root, filename), func(res http.ResponseWriter, req *http.Request) {
 		res.Header().Set("Content-Type", "application/json")
 		data, err := assetFn(filename)
 		if err != nil {

@@ -6,6 +6,10 @@ import (
 	"testing"
 )
 
+var DefaultAssetFn = func(s string) ([]byte, error) {
+	return []byte("test"), nil
+}
+
 func TestNewServeMux(t *testing.T) {
 	type args struct {
 		assetFn  swaggerui.AssetFn
@@ -18,11 +22,10 @@ func TestNewServeMux(t *testing.T) {
 		{
 			name: "TestNewServeMux",
 			args: args{
-				assetFn:  nil,
+				assetFn: DefaultAssetFn,
 				filename: "swagger.json",
 			},
 		},
-
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -36,6 +39,17 @@ func TestNewServeMux(t *testing.T) {
 			mux.ServeHTTP(w, req)
 			if w.Code != 200 {
 				t.Errorf("NewServeMuxWithRoot() GET swagger-ui failed, expected 200, got %d", w.Code)
+			}
+
+			// Test getting the json
+			req = httptest.NewRequest("GET", "/"+tt.args.filename, nil)
+			w = httptest.NewRecorder()
+			mux.ServeHTTP(w, req)
+			if w.Code != 200 {
+				t.Errorf("NewServeMuxWithRoot() GET swagger-ui failed, expected 200, got %d", w.Code)
+			}
+			if res := w.Body.String(); res != "test" {
+				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s",res)
 			}
 		})
 	}
@@ -54,7 +68,7 @@ func TestNewServeMuxWithRoot(t *testing.T) {
 		{
 			name: "TestNewServeMuxWithRoot",
 			args: args{
-				assetFn:  nil,
+				assetFn:  DefaultAssetFn,
 				filename: "swagger.json",
 				root:     "/v1/auth",
 			},
@@ -62,7 +76,7 @@ func TestNewServeMuxWithRoot(t *testing.T) {
 		{
 			name: "TestNewServeMuxWithRoot2",
 			args: args{
-				assetFn:  nil,
+				assetFn:  DefaultAssetFn,
 				filename: "api.swagger.json",
 				root:     "/v1/api",
 			},
@@ -80,6 +94,17 @@ func TestNewServeMuxWithRoot(t *testing.T) {
 			mux.ServeHTTP(w, req)
 			if w.Code != 200 {
 				t.Errorf("NewServeMuxWithRoot() GET swagger-ui failed, expected 200, got %d", w.Code)
+			}
+
+			// Test getting the json
+			req = httptest.NewRequest("GET", tt.args.root+"/"+tt.args.filename, nil)
+			w = httptest.NewRecorder()
+			mux.ServeHTTP(w, req)
+			if w.Code != 200 {
+				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 200, got %d", w.Code)
+			}
+			if res := w.Body.String(); res != "test" {
+				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s",res)
 			}
 		})
 	}
