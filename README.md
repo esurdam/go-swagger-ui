@@ -1,6 +1,8 @@
 go-swagger-ui
 ============
 
+[![test](https://github.com/esurdam/go-swagger-ui/actions/workflows/go.yml/badge.svg)](https://github.com/esurdam/go-swagger-ui/actions/workflows/go.yml)
+
 This repo provides go handlers for serving `swagger.json` and the [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
 Commonly used with [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) compiled swagger.  
