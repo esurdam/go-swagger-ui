@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.15
+
+      - uses: actions/checkout@v2
+
+      - name: Test
+        run: make test
+
+      - name: Coverage
+        run: make coverage
+
+      - name: Publish code cov
+        uses: actions/upload-artifact@v2
+        with:
+          name: code covarege report
+          path: |
+            coverage.html
+            coverage.txt
