@@ -107,6 +107,14 @@ func TestNewServeMuxWithRoot(t *testing.T) {
 			if res := w.Body.String(); res != "test" {
 				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 'test', got %s", res)
 			}
+
+			// Test no url in query
+			req = httptest.NewRequest("GET", tt.args.root+"/swagger-ui/", nil)
+			w = httptest.NewRecorder()
+			mux.ServeHTTP(w, req)
+			if w.Code != 307 {
+				t.Errorf("NewServeMuxWithRoot() GET json failed, expected 301, got %d", w.Code)
+			}
 		})
 	}
 }

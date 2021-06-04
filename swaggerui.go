@@ -25,7 +25,7 @@ type pathHandler struct {
 // ServeHTTP handles prefixes for serving the UI.
 func (f *pathHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// If prefix contains requested path. (Allows for /v1/auth/swagger-ui/ or /v1/auth/swagger-ui
-	if strings.HasPrefix(f.prefix, r.URL.Path) && r.URL.Query().Get("url") == "" {
+	if strings.HasPrefix(r.URL.Path, f.prefix) && r.URL.Query().Get("url") == "" {
 		parts := strings.Split(f.prefix, "/")
 		q := r.URL.Query()
 		q.Add("url", strings.Join(parts[0:len(parts)-2], "/")+"/swagger.json")
