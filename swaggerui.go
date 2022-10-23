@@ -17,6 +17,14 @@ const defaultPath = "/swagger-ui/"
 // Used to instantiate handler with swagger.json.
 type AssetFn func(string) ([]byte, error)
 
+// AssetFnFromBytes should recieve swagger json file bytes and returns
+// an AssetFn to use with NewServeMux.
+func AssetFnFromBytes(swagFileBytes []byte) AssetFn {
+	return func(string) ([]byte, error) {
+		return swagFileBytes, nil
+	}
+}
+
 type pathHandler struct {
 	root   http.Handler
 	prefix string

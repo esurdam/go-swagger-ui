@@ -7,9 +7,7 @@ import (
 	swaggerui "github.com/esurdam/go-swagger-ui"
 )
 
-var DefaultAssetFn = func(s string) ([]byte, error) {
-	return []byte("test"), nil
-}
+var DefaultAssetFn = swaggerui.AssetFnFromBytes([]byte("test"))
 
 func TestNewServeMux(t *testing.T) {
 	type args struct {
